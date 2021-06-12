@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :game, only: [:index, :create, :destroy] do
       collection do
         post :newmovement
+        post :getGameState
       end
   end
 end

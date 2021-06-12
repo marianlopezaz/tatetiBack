@@ -1,13 +1,11 @@
 class Game < ApplicationRecord
-    validates :player_id1, :player_id2, :board, :moveNumber, presence: true
+    validates :player_id1, :board, :moveNumber, presence: true
 
-    def isValidMovement?(board, x,y, gameResult)
-        return board[x][y] == "" && (gameResult == nil || gameResult == "")
+    def isValidMovement?(board, x,y, game, currentPlayer)
+        return board[x][y] == "" && (game.result == nil || game.result == "") && currentPlayer == game.currentPlayer.to_i
     end
 
     def get_result(board, moveNumber)
-
-      if moveNumber === 9 then return 9 end
       
       # Three horizontal
       board.each do |row|
@@ -34,6 +32,7 @@ class Game < ApplicationRecord
           return board[2][0]
         end
     
+      if moveNumber === 9 then return 9 end
       return nil
    
     end
